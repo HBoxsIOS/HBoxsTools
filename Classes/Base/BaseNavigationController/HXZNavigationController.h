@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXZNavigationConfig.h"
 
 @protocol HXZNavigationDelegate <NSObject>
 
@@ -21,5 +22,7 @@
 - (void)back;
 
 @property(nonatomic, weak)id<HXZNavigationDelegate> backdelegate;
+
+- (void)updateWithConfig: (void (^)(HXZNavigationConfig *config))configBlock;
 
 @end

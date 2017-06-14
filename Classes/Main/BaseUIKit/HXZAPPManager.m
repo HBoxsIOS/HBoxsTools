@@ -8,7 +8,6 @@
 
 #import "HXZAPPManager.h"
 #import "HXZNavigationController.h"
-//#import "HXZLoginViewController.h"
 
 @implementation HXZAPPManager
 + (instancetype)sharedAppDelegate

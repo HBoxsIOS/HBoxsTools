@@ -17,6 +17,10 @@
 
 @property (nonatomic, strong)UIViewController *targetVC;
 
+@property (nonatomic, strong)UIButton *returnBtn;
+
+@property (nonatomic, strong)HXZNavigationConfig *navigationConfig;
+
 @end
 
 @implementation HXZNavigationController
@@ -31,17 +35,38 @@
 //    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : MainTitleColor}];
 }
 
+- (HXZNavigationConfig *)navigationConfig{
+    if (!_navigationConfig) {
+        _navigationConfig = [HXZNavigationConfig defaultConfig];
+    }
+    return _navigationConfig;
+}
+
+
+- (void)updateWithConfig:(void (^)(HXZNavigationConfig *))configBlock{
+    if (configBlock) {
+        configBlock(self.navigationConfig);
+    }
+    
+    [[UINavigationBar appearance] setBackgroundImage:self.navigationConfig.naviImage forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : self.navigationConfig.naviTitleColor}];
+    
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
+    
+}
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if (self.childViewControllers.count > 0) {
-        UIButton *backButon = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [backButon setImage:GetImage(@"go_back") forState:UIControlStateNormal];
-        backButon.imageView.frame = CGRectMake(0, 0, 35, 35);
-        [backButon sizeToFit];
-        backButon.contentEdgeInsets = UIEdgeInsetsMake(3, -10, 3, 2);
-        [backButon addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-       
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButon];
+        self.returnBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        [backButon setImage:GetImage(@"go_back") forState:UIControlStateNormal];
+        self.returnBtn.imageView.frame = CGRectMake(0, 0, 35, 35);
+        [self.returnBtn sizeToFit];
+        self.returnBtn.contentEdgeInsets = UIEdgeInsetsMake(3, -10, 3, 2);
+        [self.returnBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.returnBtn];
     }
     
     
