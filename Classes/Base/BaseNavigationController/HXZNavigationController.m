@@ -7,18 +7,12 @@
 //
 
 #import "HXZNavigationController.h"
-//#import "UIImage+HXZExtension.h"
-//#import "HXZToolHeader.h"
 
 
 @interface HXZNavigationController ()<UIGestureRecognizerDelegate>
-
-@property (nonatomic ,copy)NSString *isRoot;
-
-@property (nonatomic, strong)UIViewController *targetVC;
-
+/** 返回按钮 */
 @property (nonatomic, strong)UIButton *returnBtn;
-
+/** 配置信息 */
 @property (nonatomic, strong)HXZNavigationConfig *navigationConfig;
 
 @end
@@ -27,12 +21,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    
-//    UIImage *image = [[UIImage alloc] createImageWithColor:WhiteColor];
-//    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//    
-//    //设置文字颜色
-//    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : MainTitleColor}];
+
+}
+
+- (UIButton *)returnBtn{
+    if (!_returnBtn) {
+        _returnBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _returnBtn;
 }
 
 - (HXZNavigationConfig *)navigationConfig{
@@ -52,6 +48,13 @@
     
     [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : self.navigationConfig.naviTitleColor}];
     
+    [self.returnBtn setImage:self.navigationConfig.buttonImage forState:UIControlStateNormal];
+    [self.returnBtn setTitle:self.navigationConfig.buttonTitle forState:UIControlStateNormal];
+    self.returnBtn.backgroundColor = self.navigationConfig.buttonBackgroudColor;
+    self.returnBtn.frame = self.navigationConfig.buttonFrame;
+    self.returnBtn.contentEdgeInsets = self.navigationConfig.buttonInsets;
+    
+    
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
     
@@ -59,17 +62,12 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if (self.childViewControllers.count > 0) {
-        self.returnBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        //        [backButon setImage:GetImage(@"go_back") forState:UIControlStateNormal];
-        self.returnBtn.imageView.frame = CGRectMake(0, 0, 35, 35);
-        [self.returnBtn sizeToFit];
-        self.returnBtn.contentEdgeInsets = UIEdgeInsetsMake(3, -10, 3, 2);
+        self.returnBtn.frame = self.navigationConfig.buttonFrame;
+        self.returnBtn.contentEdgeInsets = self.navigationConfig.buttonInsets;
         [self.returnBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.returnBtn];
     }
-    
-    
 
     [super pushViewController:viewController animated:YES];
 }
@@ -81,7 +79,6 @@
 
     [self popViewControllerAnimated:YES];
     
-
 }
 
 

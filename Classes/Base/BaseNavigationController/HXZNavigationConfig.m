@@ -14,8 +14,12 @@
     
     HXZNavigationConfig *naviConfig = [[HXZNavigationConfig alloc] init];
     
-    naviConfig.naviImage = nil;
+    
     naviConfig.naviTitleColor = [UIColor blackColor];
+    
+    naviConfig.buttonFrame = CGRectMake(0, 0, 35, 35);
+    
+    naviConfig.buttonInsets = UIEdgeInsetsMake(3, -10, 3, 2);
     
     return naviConfig;
 }

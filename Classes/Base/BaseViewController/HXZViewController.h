@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, HXZVCType){
+    HXZVCTFULLSCREEN = 0,
+    HXZVCNAVIGATION  = 1,
+    HXZVCTABBAR      = 2
+    
+} ;
+
 @interface HXZViewController : UIViewController
 
 @property (nonatomic,strong)UIScrollView *conetView;
+
+@property (nonatomic, assign)HXZVCType VCType;
 
 - (void)pop;
 

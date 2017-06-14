@@ -25,11 +25,39 @@
     self.edgesForExtendedLayout = UIRectEdgeAll;
     
     UIScrollView *scrollView = [[UIScrollView alloc]init];
-    scrollView.frame = CGRectMake(0, 0, self.view.my_width, self.view.my_height );
+    scrollView.frame = CGRectMake(0, 0, self.view.my_width, self.view.my_height - 64);
     [self.view addSubview:scrollView];
     self.conetView = scrollView;
     
     
+}
+
+- (void)setVCType:(HXZVCType)VCType{
+    _VCType = VCType;
+    
+    
+    switch (VCType) {
+        case HXZVCTFULLSCREEN:
+        {
+            self.conetView.frame = CGRectMake(0, 0, self.view.my_width, self.view.my_height);
+        }
+            break;
+        case HXZVCNAVIGATION:
+        {
+            
+        }
+            break;
+        case HXZVCTABBAR:
+        {
+            self.conetView.frame = CGRectMake(0, 0, self.view.my_width, self.view.my_height - 64 - 49);
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
 }
 
 
