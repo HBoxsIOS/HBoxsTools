@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HBoxsTools"
-  s.version      = "0.0.1"
+  s.version      = "0.0.5"
   s.summary      = "HBoxsTools."
 
   # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = "红匣子HBoxsTools"
 
-  s.homepage     = "https://github.com/HBoxsIOS/HBoxsTools.gits"
+  s.homepage     = "https://github.com/HBoxsIOS/HBoxsTools.git"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -63,7 +63,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-    s.platform     = :ios, "8ß.0"
+    s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -162,22 +162,23 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'Base' do |base|
-    base.source_files = 'Classes/Base/**/*.{h,m}'
-    base.frameworks = "UIKit", "Foundation", "CFNetwork"
+    base.source_files = 'Classes/Base/BaseProgressHUD/**/*.{h,m}', 'Classes/Base/BaseViewController/**/*.{h,m}','Classes/Base/BaseNavigationController/**/*.{h,m}', 'Classes/Base/BaseWebView/**/*.{h,m}'
+    base.frameworks = "UIKit", "Foundation"
     base.dependency 'HBboxsLib/Category'
     base.dependency 'HBboxsLib/Header'
-    base.dependency 'HBboxsLib/NetWorking'
+# base.dependency 'HBboxsLib/NetWorking'
     base.dependency 'MBProgressHUD'
     end
-
 
     s.subspec 'Main' do |main|
     main.source_files = 'Classes/Main/**/*.{h,m}'
     main.frameworks = "UIKit", "Foundation"
-    main.dependency 'HBboxsLib/Category'
-    main.dependency 'HBboxsLib/Header'
+# main.dependency 'HBboxsLib/Category'
+#main.dependency 'HBboxsLib/Header'
     main.dependency 'HBboxsLib/Base'
     end
+
+
 
 
 end

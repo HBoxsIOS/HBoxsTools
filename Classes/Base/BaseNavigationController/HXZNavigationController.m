@@ -7,8 +7,8 @@
 //
 
 #import "HXZNavigationController.h"
-#import "UIImage+HXZExtension.h"
-#import "HXZToolHeader.h"
+//#import "UIImage+HXZExtension.h"
+//#import "HXZToolHeader.h"
 
 
 @interface HXZNavigationController ()<UIGestureRecognizerDelegate>
@@ -23,12 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIImage *image = [[UIImage alloc] createImageWithColor:WhiteColor];
-    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-    
-    //设置文字颜色
-    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : MainTitleColor}];
+//    
+//    UIImage *image = [[UIImage alloc] createImageWithColor:WhiteColor];
+//    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+//    
+//    //设置文字颜色
+//    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName : MainTitleColor}];
 }
 
 
