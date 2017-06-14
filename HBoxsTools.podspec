@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HBoxsTools"
-  s.version      = "0.0.5"
+  s.version      = "0.0.7"
   s.summary      = "HBoxsTools."
 
   # This description is used to generate tags and improve search results.
@@ -146,7 +146,7 @@ Pod::Spec.new do |s|
     s.subspec 'User' do |user|
     user.source_files = 'Classes/User/*.{h,m}'
     user.frameworks = "Foundation"
-    user.dependency 'HBboxsLib/Category'
+    user.dependency 'HBoxsTools/Category'
     end
 
     s.subspec 'WebImage' do |webImage|
@@ -162,20 +162,20 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'Base' do |base|
-    base.source_files = 'Classes/Base/BaseProgressHUD/**/*.{h,m}', 'Classes/Base/BaseViewController/**/*.{h,m}','Classes/Base/BaseNavigationController/**/*.{h,m}', 'Classes/Base/BaseWebView/**/*.{h,m}'
+    base.source_files = 'Classes/Base/**/*.{h,m}'
     base.frameworks = "UIKit", "Foundation"
-    base.dependency 'HBboxsLib/Category'
-    base.dependency 'HBboxsLib/Header'
-# base.dependency 'HBboxsLib/NetWorking'
+    base.dependency 'HBoxsTools/Category'
+    base.dependency 'HBoxsTools/Header'
+    base.dependency 'HBoxsTools/NetWorking'
     base.dependency 'MBProgressHUD'
     end
 
     s.subspec 'Main' do |main|
     main.source_files = 'Classes/Main/**/*.{h,m}'
     main.frameworks = "UIKit", "Foundation"
-# main.dependency 'HBboxsLib/Category'
-#main.dependency 'HBboxsLib/Header'
-    main.dependency 'HBboxsLib/Base'
+    main.dependency 'HBoxsTools/Category'
+    main.dependency 'HBoxsTools/Header'
+    main.dependency 'HBoxsTools/Base'
     end
 
 
