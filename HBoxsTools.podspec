@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HBoxsTools"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "HBoxsTools."
 
   # This description is used to generate tags and improve search results.
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #
 
   #s.source_files  = "Classes", "Classes/**/*.{h,m}"
- #s.exclude_files = "Classes/Exclude"
+  #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
 
@@ -141,6 +141,7 @@ Pod::Spec.new do |s|
     s.subspec 'Category' do |category|
     category.source_files = 'Classes/Category/**/*.{h,m}'
     category.frameworks = "UIKit", "Foundation", "QuartzCore", "CFNetwork"
+    category.requires_arc = true
     end
 
     s.subspec 'User' do |user|
