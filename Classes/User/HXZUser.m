@@ -9,19 +9,45 @@
 #import "HXZUser.h"
 #import "HXZUserConfig.h"
 #import "NSString+HXZExtension.h"
-
+#import <objc/runtime.h>
 @implementation HXZUser
 
 
 
-+ (HXZUser *)sharedManager{
+//+ (HXZUser *)sharedManager{
+//    
+//    static HXZUser *sharedAccountManagerInstance = nil;
+//    static dispatch_once_t predicate;
+//    dispatch_once(&predicate, ^{
+//        sharedAccountManagerInstance = [[self alloc] init];
+//    });
+//    return sharedAccountManagerInstance;
+//}
+
++(instancetype)sharedManager
+{
     
-    static HXZUser *sharedAccountManagerInstance = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        sharedAccountManagerInstance = [[self alloc] init];
-    });
-    return sharedAccountManagerInstance;
+    id instance = objc_getAssociatedObject(self, @"instance");
+    
+    if (!instance)
+    {
+        instance = [[super allocWithZone:NULL] init];
+        
+        objc_setAssociatedObject(self, @"instance", instance, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return instance;
+    //    return [self alloc];
+}
+
++(id) allocWithZone:(struct _NSZone *)zone
+{
+    return [self sharedManager] ;
+}
+
+-(id) copyWithZone:(struct _NSZone *)zone
+{
+    Class selfClass = [self class];
+    return [selfClass sharedManager] ;
 }
 
 
@@ -98,6 +124,7 @@
     self.img = nil;
     self.sex = nil;
     self.name = nil;
+    
     // 退出客服
    
 }
@@ -105,6 +132,12 @@
 
 
 - (BOOL)isLogin {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    if (self.token) {
+        [userDefault setObject:@YES forKey:ISLOGIN];
+    }else{
+        [userDefault setObject:@NO forKey:ISLOGIN];
+    }
     return [[NSUserDefaults standardUserDefaults] boolForKey:ISLOGIN];
 }
 

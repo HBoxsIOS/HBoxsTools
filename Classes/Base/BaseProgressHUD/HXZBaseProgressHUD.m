@@ -16,6 +16,7 @@
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     
     hub.removeFromSuperViewOnHide = YES;
+
     
     hub.userInteractionEnabled = NO;
 }
@@ -25,8 +26,8 @@
     [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
-+ (void)showMsg:(NSString *)msg duration:(CGFloat)time{
-    
++ (void)showMsg:(NSString *)msg duration:(CGFloat)time Complete:(void (^)())complete{
+    [self hide];
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     
     hub.mode = MBProgressHUDModeText;
@@ -48,10 +49,16 @@
     hub.margin = 15;
     
     [hub hideAnimated:YES afterDelay:time];
+    
+     hub.completionBlock = complete;
 }
 
 + (void)showMsg:(NSString *)msg{
-    [self showMsg:msg duration:1.2f];
+    [self showMsg:msg duration:1.2f Complete:nil];
+}
+
++ (void)showMsg:(NSString *)msg Complete:(void (^)())complete{
+    [self showMsg:msg duration:1.2f Complete:complete];
 }
 
 + (void)showMsg:(NSString *)msg imgName:(NSString *)imgName duration:(CGFloat)time{

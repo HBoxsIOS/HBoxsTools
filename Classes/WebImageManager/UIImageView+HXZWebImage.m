@@ -17,18 +17,25 @@
 
 - (void)setURLImageWithURL:(NSString *)URLString
           placeholderImage:(UIImage *)placeholderImage
-                  complete:(void(^)())complete{
+                  complete:(ImageComplete)complete{
 
     
     NSString *UTF8String = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-
-    
-    [self sd_setImageWithURL:[NSURL URLWithString:UTF8String] placeholderImage:nil options:SDWebImageProgressiveDownload completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self sd_setImageWithURL:[NSURL URLWithString:UTF8String] placeholderImage:placeholderImage options:SDWebImageProgressiveDownload completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.image = image;
         if (complete) {
-            complete();
+            complete(image, imageURL);
         }
     }];
+}
+
+
+- (void)setURLImageWithURL:(NSString *)URLString placeholderImage:(UIImage *)placeholderImage{
+    [self setURLImageWithURL:URLString placeholderImage:placeholderImage complete:nil];
+}
+
+- (void)setURLImageWithURL:(NSString *)URLString{
+    [self setURLImageWithURL:URLString placeholderImage:nil];
 }
 
 @end

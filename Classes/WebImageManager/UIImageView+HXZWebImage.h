@@ -8,14 +8,40 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ImageComplete)(UIImage *image, NSURL *imageURL);
+
 @interface UIImageView (HXZWebImage)
 
 
+
 /**
- 下载网络图片
+ 下载图片
+
+ @param URLString 图片URL
+ @param placeholderImage 占位图
+ @param complete 完成回调
  */
 - (void)setURLImageWithURL:(NSString *)URLString
           placeholderImage:(UIImage *)placeholderImage
-                  complete:(void(^)())complete;
+                  complete:(ImageComplete)complete;
+
+
+/**
+ 下载图片
+
+ @param URLString 图片URL
+ @param placeholderImage 占位图
+ */
+- (void)setURLImageWithURL:(NSString *)URLString
+          placeholderImage:(UIImage *)placeholderImage;
+
+
+/**
+ 下载图片
+
+ @param URLString 图片URL
+ */
+- (void)setURLImageWithURL:(NSString *)URLString;
+
 
 @end

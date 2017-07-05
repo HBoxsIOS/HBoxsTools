@@ -12,7 +12,7 @@
 
 
 #import "NSString+HXZExtension.h"
-
+#import "UILabel+HXZExtension.h"
 
 #import "UIView+HXZExtension.h"
 

@@ -29,14 +29,14 @@
  @param msg 标题
  @param time 显示时间
  */
-+ (void)showMsg:(NSString *)msg duration:(CGFloat)time;
++ (void)showMsg:(NSString *)msg duration:(CGFloat)time Complete:(void(^)())complete;
 
 
 /**
  标题样式 默认显示时间1.2f
  */
 + (void)showMsg:(NSString *)msg;
-
++ (void)showMsg:(NSString *)msg Complete:(void(^)())complete;
 
 /**
  标题 + 图片 样式
