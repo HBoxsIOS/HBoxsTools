@@ -9,10 +9,15 @@
 
 #import <AFNetworking/AFNetworking.h>
 
+#define MYISUCESS [responseObject[@"code"] isEqual:@0]
+#define MYIERROR responseObject[@"errmsg"]
+#define MYIISTOKEN [responseObject[@"code"] isEqual:@2]
+
 typedef void(^SuccessBlock)(NSURLSessionDataTask *task, id responseObject);
 
 typedef void(^FailureBlock)(NSString *error);
 
+static NSString *const SERVERERROR = @"服务器开了小差,稍后再试";
 
 @interface MYINetRequestManager : NSObject
 
@@ -20,6 +25,25 @@ typedef void(^FailureBlock)(NSString *error);
  创建网络请求实例
  */
 + (instancetype)manager;
+
+/**
+ 默认GET
+ */
+- (void)GET:(NSString *)URLString
+ parameters:(id)parameters
+   progress:(void (^)(NSProgress *downloadProgress))downloadProgress
+    success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+    failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+
+
+/**
+ 默认POST
+ */
+- (void)POST:(NSString *)URLString
+  parameters:(id)parameters
+    progress:(void (^)(NSProgress *uploadProgress))uploadProgress
+     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+     failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
  带progress GET请求

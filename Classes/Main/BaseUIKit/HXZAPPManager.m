@@ -12,8 +12,12 @@
 @implementation HXZAPPManager
 + (instancetype)sharedAppDelegate
 {
-    
-    return (HXZAPPManager *)[UIApplication sharedApplication].delegate;
+    static HXZAPPManager *sharedAccountManagerInstance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        sharedAccountManagerInstance = [[self alloc] init];
+    });
+    return sharedAccountManagerInstance;
 }
 
 
@@ -23,7 +27,7 @@
     
     //    UIWindow *window = self.window;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-
+   
     
     if ([window.rootViewController isKindOfClass:[UINavigationController class]])
     {
@@ -43,7 +47,9 @@
 
 - (UIViewController *)topViewController
 {
+    
     UINavigationController *nav = [self navigationViewController];
+    
     return nav.topViewController;
 }
 

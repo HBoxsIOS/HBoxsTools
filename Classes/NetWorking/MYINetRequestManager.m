@@ -10,9 +10,7 @@
 
 //#import "HXZAPPManager.h"
 
-#define MYISUCESS [responseObject[@"code"] isEqual:@0]
-#define MYIERROR responseObject[@"errmsg"]
-#define MYIISTOKEN [responseObject[@"code"] isEqual:@2]
+
 
 @interface MYINetRequestManager()
 
@@ -23,7 +21,7 @@
 
 @implementation MYINetRequestManager
 
-static NSString *const SERVERERROR = @"服务器开了小差,稍后再试";
+
 
 - (AFHTTPSessionManager *)manager{
     if (!_manager) {
@@ -115,6 +113,7 @@ static NSString *const SERVERERROR = @"服务器开了小差,稍后再试";
             failure(MYIERROR);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nullable error) {
+      
         failure(SERVERERROR);
     }];
     
